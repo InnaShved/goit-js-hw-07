@@ -30,13 +30,20 @@ function openImage(event) {
     const imageLink = event.target.getAttribute('data-source');
     console.log(imageLink);
 
-    basicLightbox.create(`
-		<img src='${imageLink}'/>
-	`).show();
+    const instance = basicLightbox.create(`
+		<img src='${imageLink}' width='800' height='600'/>
+	`);
+    instance.show();
+
+    document.addEventListener("keydown", event => {
+        if (event.code !== "Escape") {
+            return;
+        }
+        instance.close();
+    });
 }
 
 galleryList.addEventListener('click', openImage);
-
 
 
 
