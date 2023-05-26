@@ -7,12 +7,18 @@ import { galleryItems } from './gallery-items.js';
 const galleryList = document.querySelector('.gallery');
 
 
-galleryItems.forEach(item => {
-    galleryList.insertAdjacentHTML('beforeend', `<li class="gallery__item"><a class="gallery__link" href=${item.original}><img class="gallery__image"
-//       src=${item.preview}
-//       data-source=${item.original}
-//       alt=${item.description} /></a></li> `);
-});
+// galleryItems.forEach(item => {
+//     galleryList.insertAdjacentHTML('beforeend', `<li class="gallery__item"><a class="gallery__link" href=${item.original}><img class="gallery__image"
+// //       src=${item.preview}
+// //       data-source=${item.original}
+// //       alt=${item.description} /></a></li> `);
+// });
+
+const gallaryListItems = galleryItems.map((item) => `<li class="gallery__item"><a class="gallery__link" href=${item.original}><img class="gallery__image" src=${item.preview} data-source=${item.original} alt=${item.description} /></a></li> `).join("");
+
+
+
+galleryList.insertAdjacentHTML('beforeend', gallaryListItems);
 
 function openImage(event) {
     event.preventDefault();
