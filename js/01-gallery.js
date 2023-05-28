@@ -30,20 +30,32 @@ function openImage(event) {
     const imageLink = event.target.getAttribute('data-source');
     console.log(imageLink);
 
-    const instance = basicLightbox.create(`
-		<img src='${imageLink}' width='800' height='600'/>
-	`);
-    instance.show();
+    const instance = basicLightbox.create(
+        `<img src='${imageLink}' width='800' height='600'/>`, {
+        onShow: () => {
+            window.addEventListener('keydown', handleEscapeKeydown);
+        },
+        onClose: () => {
+            window.removeEventListener('keydown', handleEscapeKeydown);
+        }
+    });
 
-    document.addEventListener("keydown", event => {
+    const handleEscapeKeydown = (event) => {
         if (event.code !== "Escape") {
             return;
         }
         instance.close();
-    });
-}
+    };
+
+    instance.show();
+};
 
 galleryList.addEventListener('click', openImage);
+
+
+
+    
+
 
 
 
